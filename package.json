@@ -1,0 +1,29 @@
+{
+  "name": "@cdsap/gbos",
+  "version": "0.1.0",
+  "description": "Source-neutral GBOS parsing, normalization, querying, and visualization planning",
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js",
+    "./model": "./dist/model/index.js",
+    "./parse": "./dist/parse/index.js",
+    "./adapters/develocity": "./dist/adapters/develocity/index.js",
+    "./adapters/report": "./dist/adapters/report/index.js",
+    "./query": "./dist/query/index.js",
+    "./presentation": "./dist/presentation/index.js",
+    "./render-dom": "./dist/render/dom/index.js",
+    "./render-vega-lite": "./dist/render/vega-lite/index.js"
+  },
+  "files": ["dist", "schemas"],
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "check": "tsc --noEmit --project tsconfig.json",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.0"
+  }
+}
