@@ -2,26 +2,42 @@
   "name": "@cdsap/gbos",
   "version": "0.1.0",
   "description": "Source-neutral GBOS parsing, normalization, querying, and visualization planning",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cdsap/build-observability-client.git"
+  },
   "type": "module",
+  "sideEffects": false,
   "exports": {
-    ".": "./dist/index.js",
-    "./model": "./dist/model/index.js",
-    "./parse": "./dist/parse/index.js",
-    "./adapters/develocity": "./dist/adapters/develocity/index.js",
-    "./adapters/report": "./dist/adapters/report/index.js",
-    "./query": "./dist/query/index.js",
-    "./presentation": "./dist/presentation/index.js",
-    "./render-dom": "./dist/render/dom/index.js",
-    "./render-vega-lite": "./dist/render/vega-lite/index.js"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./assets": {
+      "types": "./dist/assets/index.d.ts",
+      "default": "./dist/assets/index.js"
+    },
+    "./schema/*": "./schemas/schema/*",
+    "./registry/*": "./schemas/registry/*",
+    "./package.json": "./package.json"
   },
   "files": ["dist", "schemas"],
   "scripts": {
-    "build": "tsc --project tsconfig.json",
+    "clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
+    "build": "npm run clean && tsc --project tsconfig.json",
     "check": "tsc --noEmit --project tsconfig.json",
-    "test": "node --test"
+    "test": "npm run build && node --test \"test/**/*.test.mjs\"",
+    "pack:verify": "npm run build && node scripts/verify-package.mjs",
+    "assets:sync": "node scripts/sync-schema-assets.mjs",
+    "assets:check": "node scripts/sync-schema-assets.mjs --check",
+    "prepublishOnly": "npm run check && npm test && node scripts/verify-package.mjs"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   },
   "devDependencies": {
     "typescript": "^5.8.0"
