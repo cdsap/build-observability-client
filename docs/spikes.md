@@ -17,3 +17,5 @@ The work is intentionally split into independently reviewable spikes:
 
 The GBOS schema repository remains the language-neutral contract. This package
 must consume released schema and registry assets rather than redefining them.
+
+Accepted decisions are recorded in `docs/adr/`.
