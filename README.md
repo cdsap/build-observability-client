@@ -24,6 +24,8 @@ The package is ESM-only and targets Node.js 22+ and ES2022 browsers.
 |---|---|
 | `@cdsap/gbos` | Package identity; stable core APIs are added by later spikes. |
 | `@cdsap/gbos/assets` | `SCHEMA_ASSETS`, the provenance of the bundled schema release. |
+| `@cdsap/gbos/validate` | Browser-safe structural and semantic validation APIs. |
+| `@cdsap/gbos/registry` | Registry lookup construction for semantic validation. |
 | `@cdsap/gbos/schema/*` | Canonical JSON Schemas, e.g. `schema/observation.schema.json`. |
 | `@cdsap/gbos/registry/*` | Canonical registries, e.g. `registry/semantic-conventions.json`. |
 | `@cdsap/gbos/package.json` | Package metadata. |
@@ -54,3 +56,11 @@ release artifact; `npm run assets:sync` regenerates them after the pin in
 The canonical design is documented in the GBOS consumer and visualization
 library specification. The schema repository owns the contract and registry;
 this repository owns consumer behavior and presentation planning.
+
+Validation uses statically compiled TypeScript checks rather than a runtime JSON
+Schema compiler. `validateObservation`, `validateFragment`, and `validateBatch`
+perform structural checks against the pinned schema shape, then optional
+semantic checks through `createRegistryLookup`. The implementation has no
+`eval`, remote code, or host API dependency, so the same entry points work in
+Manifest V3 browsers and Node.js. Strict mode rejects semantic errors;
+compatible mode retains structurally valid records with semantic diagnostics.

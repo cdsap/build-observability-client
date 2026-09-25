@@ -17,6 +17,14 @@
       "types": "./dist/assets/index.d.ts",
       "default": "./dist/assets/index.js"
     },
+    "./validate": {
+      "types": "./dist/validate.d.ts",
+      "default": "./dist/validate.js"
+    },
+    "./registry": {
+      "types": "./dist/registry.d.ts",
+      "default": "./dist/registry.js"
+    },
     "./schema/*": "./schemas/schema/*",
     "./registry/*": "./schemas/registry/*",
     "./package.json": "./package.json"

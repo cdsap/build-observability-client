@@ -8,7 +8,7 @@ const pkg = JSON.parse(readFileSync(new URL("package.json", root), "utf8"));
 const provenance = JSON.parse(readFileSync(new URL("schemas/provenance.json", root), "utf8"));
 
 // Keep in sync with the subpath table in README.md and docs/adr/0001.
-const DOCUMENTED_SUBPATHS = [".", "./assets", "./schema/*", "./registry/*", "./package.json"];
+const DOCUMENTED_SUBPATHS = [".", "./assets", "./validate", "./registry", "./schema/*", "./registry/*", "./package.json"];
 
 describe("package exports", () => {
   it("exposes exactly the documented subpaths", () => {
@@ -33,6 +33,13 @@ describe("package exports", () => {
     const { SCHEMA_ASSETS } = await import("@cdsap/gbos/assets");
     assert.equal(SCHEMA_ASSETS.repository, "cdsap/build-observability-schema");
     assert.deepEqual(SCHEMA_ASSETS, provenance);
+  });
+
+  it("imports validator and registry entry points", async () => {
+    const validator = await import("@cdsap/gbos/validate");
+    const registry = await import("@cdsap/gbos/registry");
+    assert.equal(typeof validator.validateObservation, "function");
+    assert.equal(typeof registry.createRegistryLookup, "function");
   });
 
   it("resolves every pinned schema and registry file through its subpath", () => {
