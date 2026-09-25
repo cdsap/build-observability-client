@@ -17,6 +17,10 @@
       "types": "./dist/assets/index.d.ts",
       "default": "./dist/assets/index.js"
     },
+    "./query": {
+      "types": "./dist/query.d.ts",
+      "default": "./dist/query.js"
+    },
     "./schema/*": "./schemas/schema/*",
     "./registry/*": "./schemas/registry/*",
     "./package.json": "./package.json"
