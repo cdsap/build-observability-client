@@ -23,15 +23,21 @@ Current subpaths:
 
 | Subpath | Contents |
 |---|---|
-| `@cdsap/gbos` | Package identity. Later spikes re-export stable core APIs here. |
+| `@cdsap/gbos` | Package identity, canonical model, and stable core APIs. |
 | `@cdsap/gbos/assets` | `SCHEMA_ASSETS`: provenance of the pinned schema/registry release. |
+| `@cdsap/gbos/model` | Canonical observations, normalized records, metadata, and provenance types. |
+| `@cdsap/gbos/parse` | Shared parser options, diagnostics, and parse errors. |
+| `@cdsap/gbos/adapters/source` | Shared source-adapter contract. |
+| `@cdsap/gbos/adapters/direct` | Direct self-contained observation adapter. |
+| `@cdsap/gbos/adapters/report` | Report envelope and observation-batch adapter. |
+| `@cdsap/gbos/adapters/ndjson` | Complete-text and async-iterable NDJSON adapters. |
 | `@cdsap/gbos/schema/*` | Canonical JSON Schemas, e.g. `@cdsap/gbos/schema/observation.schema.json`. |
 | `@cdsap/gbos/registry/*` | Canonical registries, e.g. `@cdsap/gbos/registry/semantic-conventions.json`. |
 | `@cdsap/gbos/package.json` | Package metadata. |
 
 The following subpaths are reserved. Each is added to `exports` by the spike that
 implements it, never before, so every documented subpath is importable:
-`./model`, `./parse`, `./adapters/develocity`, `./adapters/report`, `./query`,
+`./adapters/develocity`, `./query`,
 `./presentation`, `./render-dom`, and `./render-vega-lite`.
 
 A single package is enough for now. Subpath exports plus `"sideEffects": false`

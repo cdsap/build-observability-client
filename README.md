@@ -22,8 +22,11 @@ The package is ESM-only and targets Node.js 22+ and ES2022 browsers.
 
 | Subpath | Contents |
 |---|---|
-| `@cdsap/gbos` | Package identity; stable core APIs are added by later spikes. |
+| `@cdsap/gbos` | Package identity, canonical model, and source adapters. |
 | `@cdsap/gbos/assets` | `SCHEMA_ASSETS`, the provenance of the bundled schema release. |
+| `@cdsap/gbos/adapters/direct` | `parseDirectObservation` for self-contained observations. |
+| `@cdsap/gbos/adapters/report` | `parseReport` for report envelopes and observation batches. |
+| `@cdsap/gbos/adapters/ndjson` | `parseNdjson` and `parseNdjsonAsync` for complete or async NDJSON input. |
 | `@cdsap/gbos/schema/*` | Canonical JSON Schemas, e.g. `schema/observation.schema.json`. |
 | `@cdsap/gbos/registry/*` | Canonical registries, e.g. `registry/semantic-conventions.json`. |
 | `@cdsap/gbos/package.json` | Package metadata. |
@@ -54,3 +57,18 @@ release artifact; `npm run assets:sync` regenerates them after the pin in
 The canonical design is documented in the GBOS consumer and visualization
 library specification. The schema repository owns the contract and registry;
 this repository owns consumer behavior and presentation planning.
+
+### Source adapters
+
+Every adapter returns a `NormalizedDataset` containing records with the
+canonical observation, consumer-only metadata, and source provenance. Report
+`resource` and optional `buildContext` values stay in record metadata; they are
+never injected into observation attributes. Report batches provide shared
+schema and producer headers to their child observations.
+
+Adapters are strict by default and throw `ParseError` for malformed input.
+Pass `{ mode: "compatible" }` to retain valid neighboring NDJSON lines and
+receive diagnostics for malformed lines. Blank NDJSON input and blank lines
+produce no records or diagnostics. A report must have `schemaVersion` and
+`resource`; a report without an observation collection is malformed in strict
+mode, while empty collections normalize to an empty dataset.
