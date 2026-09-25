@@ -1,0 +1,25 @@
+{
+  "observation": {
+    "schemaVersion": "1.0.0",
+    "producer": { "name": "fixture", "version": "1.0.0" },
+    "scope": "jvm.process",
+    "aggregationScope": "entity",
+    "attributes": { "id": "one" },
+    "measurements": [{ "name": "jvm.process.cpu.time", "value": 1, "unit": "ms", "aggregation": "last" }]
+  },
+  "report": {
+    "schemaVersion": "1.0.0",
+    "resource": { "service.name": "fixture" },
+    "observations": [
+      {
+        "schemaVersion": "1.0.0",
+        "producer": { "name": "fixture", "version": "1.0.0" },
+        "scope": "jvm.process",
+        "aggregationScope": "entity",
+        "attributes": { "id": "one" },
+        "measurements": [{ "name": "jvm.process.cpu.time", "value": 1, "unit": "ms", "aggregation": "last" }]
+      }
+    ]
+  },
+  "ndjson": "{\"schemaVersion\":\"1.0.0\",\"producer\":{\"name\":\"fixture\",\"version\":\"1.0.0\"},\"scope\":\"jvm.process\",\"aggregationScope\":\"entity\",\"attributes\":{\"id\":\"one\"},\"measurements\":[{\"name\":\"jvm.process.cpu.time\",\"value\":1,\"unit\":\"ms\",\"aggregation\":\"last\"}]}"
+}

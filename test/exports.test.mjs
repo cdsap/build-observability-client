@@ -8,7 +8,7 @@ const pkg = JSON.parse(readFileSync(new URL("package.json", root), "utf8"));
 const provenance = JSON.parse(readFileSync(new URL("schemas/provenance.json", root), "utf8"));
 
 // Keep in sync with the subpath table in README.md and docs/adr/0001.
-const DOCUMENTED_SUBPATHS = [".", "./assets", "./schema/*", "./registry/*", "./package.json"];
+const DOCUMENTED_SUBPATHS = [".", "./assets", "./model", "./parse", "./adapters/source", "./adapters/direct", "./adapters/report", "./adapters/ndjson", "./schema/*", "./registry/*", "./package.json"];
 
 describe("package exports", () => {
   it("exposes exactly the documented subpaths", () => {
