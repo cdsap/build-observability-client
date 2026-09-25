@@ -24,6 +24,7 @@ The package is ESM-only and targets Node.js 22+ and ES2022 browsers.
 |---|---|
 | `@cdsap/gbos` | Package identity; stable core APIs are added by later spikes. |
 | `@cdsap/gbos/assets` | `SCHEMA_ASSETS`, the provenance of the bundled schema release. |
+| `@cdsap/gbos/adapters/develocity` | `parseDevelocityProjection`, the ordered custom-value reconstruction adapter. |
 | `@cdsap/gbos/schema/*` | Canonical JSON Schemas, e.g. `schema/observation.schema.json`. |
 | `@cdsap/gbos/registry/*` | Canonical registries, e.g. `registry/semantic-conventions.json`. |
 | `@cdsap/gbos/package.json` | Package metadata. |
