@@ -25,6 +25,10 @@
       "types": "./dist/registry.d.ts",
       "default": "./dist/registry.js"
     },
+    "./adapters/develocity": {
+      "types": "./dist/adapters/develocity.d.ts",
+      "default": "./dist/adapters/develocity.js"
+    },
     "./schema/*": "./schemas/schema/*",
     "./registry/*": "./schemas/registry/*",
     "./package.json": "./package.json"
