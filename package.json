@@ -29,6 +29,10 @@
       "types": "./dist/diagnostics/index.d.ts",
       "default": "./dist/diagnostics/index.js"
     },
+    "./adapters/develocity": {
+      "types": "./dist/adapters/develocity.d.ts",
+      "default": "./dist/adapters/develocity.js"
+    },
     "./schema/*": "./schemas/schema/*",
     "./registry/*": "./schemas/registry/*",
     "./package.json": "./package.json"

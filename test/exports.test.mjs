@@ -8,7 +8,7 @@ const pkg = JSON.parse(readFileSync(new URL("package.json", root), "utf8"));
 const provenance = JSON.parse(readFileSync(new URL("schemas/provenance.json", root), "utf8"));
 
 // Keep in sync with the subpath table in README.md and docs/adr/0001.
-const DOCUMENTED_SUBPATHS = [".", "./assets", "./model", "./parse", "./diagnostics", "./schema/*", "./registry/*", "./package.json"];
+const DOCUMENTED_SUBPATHS = [".", "./assets", "./model", "./parse", "./diagnostics", "./adapters/develocity", "./schema/*", "./registry/*", "./package.json"];
 
 describe("package exports", () => {
   it("exposes exactly the documented subpaths", () => {
@@ -39,6 +39,11 @@ describe("package exports", () => {
     assert.equal(typeof (await import("@cdsap/gbos/model")).observationFingerprint, "function");
     assert.equal(typeof (await import("@cdsap/gbos/parse")).parseObservations, "function");
     assert.equal(typeof (await import("@cdsap/gbos/diagnostics")).diagnostic, "function");
+  });
+
+  it("imports the Develocity adapter entry point", async () => {
+    const { parseDevelocityProjection } = await import("@cdsap/gbos/adapters/develocity");
+    assert.equal(typeof parseDevelocityProjection, "function");
   });
 
   it("resolves every pinned schema and registry file through its subpath", () => {

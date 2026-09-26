@@ -4,3 +4,4 @@ export { canonicalObservation, createDataset, observationFingerprint } from "./m
 export { DIAGNOSTIC_CODES, diagnostic } from "./diagnostics.js";
 export type { ParseMode, ParseOptions, ParseResult } from "./parse.js";
 export { parseObservation, parseObservations } from "./parse.js";
+export * from "./adapters/develocity.js";

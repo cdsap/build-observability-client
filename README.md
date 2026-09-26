@@ -27,6 +27,7 @@ The package is ESM-only and targets Node.js 22+ and ES2022 browsers.
 | `@cdsap/gbos/model` | Canonical observation model, immutable datasets, and identity helpers. |
 | `@cdsap/gbos/parse` | Strict and compatible observation parsing. |
 | `@cdsap/gbos/diagnostics` | Diagnostic types and stable diagnostic codes. |
+| `@cdsap/gbos/adapters/develocity` | `parseDevelocityProjection`, the ordered custom-value reconstruction adapter. |
 | `@cdsap/gbos/schema/*` | Canonical JSON Schemas, e.g. `schema/observation.schema.json`. |
 | `@cdsap/gbos/registry/*` | Canonical registries, e.g. `registry/semantic-conventions.json`. |
 | `@cdsap/gbos/package.json` | Package metadata. |
