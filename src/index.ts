@@ -1,6 +1,11 @@
 export const GBOS_CLIENT_PACKAGE = "@cdsap/gbos";
-export type { Aggregation, RegistryEntry, RegistryKind, RegistryLookup, SemanticAttribute, SemanticMetric, SemanticRegistry, SemanticScope } from "./registry.js";
+export type { RegistryEntry, RegistryKind, RegistryLookup, SemanticAttribute, SemanticMetric, SemanticRegistry, SemanticScope } from "./registry.js";
 export { createRegistryLookup } from "./registry.js";
-export type { DiagnosticSeverity, DiagnosticSource, DocumentKind, ParseMode, ValidationDiagnostic, ValidationOptions, ValidationResult } from "./validate.js";
+export type { DiagnosticSource, DocumentKind, ValidationDiagnostic, ValidationOptions, ValidationResult } from "./validate.js";
 export { validateBatch, validateDocument, validateFragment, validateObservation } from "./validate.js";
+export type { Aggregation, AggregationScope, AttributeValue, Attributes, BuildContext, DatasetDiagnostics, DatasetOptions, Diagnostic, DiagnosticSeverity, Histogram, HistogramBucket, Measurement, NormalizedObservation, Observation, ObservationDataset, Producer, Provenance, RejectedRecord, Transport } from "./model.js";
+export { canonicalObservation, createDataset, observationFingerprint } from "./model.js";
+export { DIAGNOSTIC_CODES, diagnostic } from "./diagnostics.js";
+export type { ParseMode, ParseOptions, ParseResult } from "./parse.js";
+export { parseObservation, parseObservations } from "./parse.js";
 export * from "./adapters/develocity.js";
