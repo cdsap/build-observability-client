@@ -1,0 +1,11 @@
+{
+  "customValues": [
+    { "name": "gbos.v1.observation", "value": "{\"scope\":\"jvm.process\",\"aggregationScope\":\"entity\",\"attributes\":{\"kind\":\"full\"},\"measurements\":[{\"name\":\"jvm.process.cpu.time\",\"value\":1,\"unit\":\"ms\",\"aggregation\":\"last\"}]}" },
+    { "name": "gbos.v1.observations", "value": "{\"schemaVersion\":\"1.0.0\",\"producer\":{\"name\":\"info-kotlin-process\",\"version\":\"1.0.0\"},\"observations\":[{\"scope\":\"jvm.process\",\"aggregationScope\":\"entity\",\"attributes\":{\"kind\":\"batch\"},\"measurements\":[{\"name\":\"jvm.process.cpu.time\",\"value\":2,\"unit\":\"ms\",\"aggregation\":\"last\"}]}]}" },
+    { "name": "gbos.v1.producer.info_test_process.name", "value": "info-test-process" },
+    { "name": "gbos.v1.producer.info_test_process.version", "value": "2.0.0" },
+    { "name": "gbos.v1.producer.info_test_process.observation", "value": "{\"scope\":\"jvm.process\",\"aggregationScope\":\"entity\",\"attributes\":{\"kind\":\"fragment\"},\"measurements\":[{\"name\":\"jvm.process.cpu.time\",\"value\":3,\"unit\":\"ms\",\"aggregation\":\"last\"}]}" },
+    { "name": "gbos.v1.index.info_test_process.jvm.process.cpu.time.sum", "value": "6" }
+  ],
+  "tags": ["gbos:v1:producer:info-test-process"]
+}

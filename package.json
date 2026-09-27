@@ -17,12 +17,26 @@
       "types": "./dist/assets/index.d.ts",
       "default": "./dist/assets/index.js"
     },
-    "./model": { "types": "./dist/model.d.ts", "default": "./dist/model.js" },
-    "./parse": { "types": "./dist/parse.d.ts", "default": "./dist/parse.js" },
+    "./model": {
+      "types": "./dist/model/index.d.ts",
+      "default": "./dist/model/index.js"
+    },
+    "./parse": {
+      "types": "./dist/parse/index.d.ts",
+      "default": "./dist/parse/index.js"
+    },
+    "./diagnostics": {
+      "types": "./dist/diagnostics/index.d.ts",
+      "default": "./dist/diagnostics/index.js"
+    },
     "./adapters/source": { "types": "./dist/adapters/source.d.ts", "default": "./dist/adapters/source.js" },
     "./adapters/direct": { "types": "./dist/adapters/direct.d.ts", "default": "./dist/adapters/direct.js" },
     "./adapters/report": { "types": "./dist/adapters/report.d.ts", "default": "./dist/adapters/report.js" },
     "./adapters/ndjson": { "types": "./dist/adapters/ndjson.d.ts", "default": "./dist/adapters/ndjson.js" },
+    "./adapters/develocity": {
+      "types": "./dist/adapters/develocity.d.ts",
+      "default": "./dist/adapters/develocity.js"
+    },
     "./schema/*": "./schemas/schema/*",
     "./registry/*": "./schemas/registry/*",
     "./package.json": "./package.json"

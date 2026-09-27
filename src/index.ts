@@ -1,7 +1,11 @@
 export const GBOS_CLIENT_PACKAGE = "@cdsap/gbos";
-export * from "./model.js";
-export * from "./parse.js";
-export * from "./adapters/source.js";
-export * from "./adapters/direct.js";
-export * from "./adapters/report.js";
-export * from "./adapters/ndjson.js";
+export type { Aggregation, AggregationScope, AttributeValue, Attributes, BuildContext, DatasetDiagnostics, DatasetOptions, Diagnostic, DiagnosticSeverity, Histogram, HistogramBucket, Measurement, NormalizedObservation, Observation, ObservationDataset, Producer, Provenance, RejectedRecord, Transport, JsonPrimitive, JsonValue, Resource, SourceKind, RecordMetadata, RecordProvenance, NormalizedRecord, NormalizedDataset } from "./model.js";
+export { canonicalObservation, createDataset, observationFingerprint } from "./model.js";
+export { DIAGNOSTIC_CODES, diagnostic } from "./diagnostics.js";
+export type { ParseMode, ParseOptions, ParseResult } from "./parse.js";
+export { ParseError, parseObservation, parseObservations } from "./parse.js";
+export type { SourceAdapter } from "./adapters/source.js";
+export { directObservationAdapter, parseDirectObservation, parseDirectObservations } from "./adapters/direct.js";
+export { parseReport, parseReportJson, reportAdapter } from "./adapters/report.js";
+export { ndjsonAdapter, parseNdjson, parseNdjsonAsync, parseNDJSON, parseNDJSONAsync } from "./adapters/ndjson.js";
+export { parseDevelocityProjection } from "./adapters/develocity.js";

@@ -24,9 +24,13 @@ The package is ESM-only and targets Node.js 22+ and ES2022 browsers.
 |---|---|
 | `@cdsap/gbos` | Package identity, canonical model, and source adapters. |
 | `@cdsap/gbos/assets` | `SCHEMA_ASSETS`, the provenance of the bundled schema release. |
+| `@cdsap/gbos/model` | Canonical observation model, immutable datasets, and identity helpers. |
+| `@cdsap/gbos/parse` | Strict and compatible observation parsing. |
+| `@cdsap/gbos/diagnostics` | Diagnostic types and stable diagnostic codes. |
 | `@cdsap/gbos/adapters/direct` | `parseDirectObservation` for self-contained observations. |
 | `@cdsap/gbos/adapters/report` | `parseReport` for report envelopes and observation batches. |
 | `@cdsap/gbos/adapters/ndjson` | `parseNdjson` and `parseNdjsonAsync` for complete or async NDJSON input. |
+| `@cdsap/gbos/adapters/develocity` | `parseDevelocityProjection`, the ordered custom-value reconstruction adapter. |
 | `@cdsap/gbos/schema/*` | Canonical JSON Schemas, e.g. `schema/observation.schema.json`. |
 | `@cdsap/gbos/registry/*` | Canonical registries, e.g. `registry/semantic-conventions.json`. |
 | `@cdsap/gbos/package.json` | Package metadata. |
