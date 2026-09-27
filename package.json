@@ -21,6 +21,18 @@
       "types": "./dist/query.d.ts",
       "default": "./dist/query.js"
     },
+    "./model": {
+      "types": "./dist/model/index.d.ts",
+      "default": "./dist/model/index.js"
+    },
+    "./parse": {
+      "types": "./dist/parse/index.d.ts",
+      "default": "./dist/parse/index.js"
+    },
+    "./diagnostics": {
+      "types": "./dist/diagnostics/index.d.ts",
+      "default": "./dist/diagnostics/index.js"
+    },
     "./adapters/develocity": {
       "types": "./dist/adapters/develocity.d.ts",
       "default": "./dist/adapters/develocity.js"

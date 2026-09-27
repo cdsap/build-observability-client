@@ -22,9 +22,12 @@ The package is ESM-only and targets Node.js 22+ and ES2022 browsers.
 
 | Subpath | Contents |
 |---|---|
-| `@cdsap/gbos` | Package identity and core query, derivation, grouping, and formatting APIs. |
+| `@cdsap/gbos` | Package identity, canonical model, parsing, diagnostics, and core query, derivation, grouping, and formatting APIs. |
 | `@cdsap/gbos/assets` | `SCHEMA_ASSETS`, the provenance of the bundled schema release. |
 | `@cdsap/gbos/query` | Renderer-neutral observation queries, safe aggregation, derivations, grouping, and unit formatting. |
+| `@cdsap/gbos/model` | Canonical observation model, immutable datasets, and identity helpers. |
+| `@cdsap/gbos/parse` | Strict and compatible observation parsing. |
+| `@cdsap/gbos/diagnostics` | Diagnostic types and stable diagnostic codes. |
 | `@cdsap/gbos/adapters/develocity` | `parseDevelocityProjection`, the ordered custom-value reconstruction adapter. |
 | `@cdsap/gbos/schema/*` | Canonical JSON Schemas, e.g. `schema/observation.schema.json`. |
 | `@cdsap/gbos/registry/*` | Canonical registries, e.g. `registry/semantic-conventions.json`. |
