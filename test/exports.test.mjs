@@ -8,7 +8,7 @@ const pkg = JSON.parse(readFileSync(new URL("package.json", root), "utf8"));
 const provenance = JSON.parse(readFileSync(new URL("schemas/provenance.json", root), "utf8"));
 
 // Keep in sync with the subpath table in README.md and docs/adr/0001.
-const DOCUMENTED_SUBPATHS = [".", "./assets", "./validate", "./registry", "./model", "./parse", "./diagnostics", "./adapters/source", "./adapters/direct", "./adapters/report", "./adapters/ndjson", "./adapters/develocity", "./query", "./schema/*", "./registry/*", "./package.json"];
+const DOCUMENTED_SUBPATHS = [".", "./assets", "./validate", "./registry", "./model", "./parse", "./diagnostics", "./adapters/source", "./adapters/direct", "./adapters/report", "./adapters/ndjson", "./adapters/develocity", "./query", "./presentation", "./render-dom", "./adapters/extension", "./schema/*", "./registry/*", "./package.json"];
 
 describe("package exports", () => {
   it("exposes exactly the documented subpaths", () => {
@@ -60,6 +60,12 @@ describe("package exports", () => {
 
   it("imports the query entry point", async () => {
     assert.equal(typeof (await import("@cdsap/gbos/query")).queryObservations, "function");
+  });
+
+  it("imports the presentation, DOM renderer, and extension boundaries", async () => {
+    assert.equal(typeof (await import("@cdsap/gbos/presentation")).createDevelocityViewSpec, "function");
+    assert.equal(typeof (await import("@cdsap/gbos/render-dom")).renderViewSpec, "function");
+    assert.equal(typeof (await import("@cdsap/gbos/adapters/extension")).createExtensionAdapter, "function");
   });
 
   it("resolves every pinned schema and registry file through its subpath", () => {

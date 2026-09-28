@@ -14,3 +14,5 @@ export { createRegistryLookup } from "./registry.js";
 export type { DiagnosticSource, DocumentKind, ValidationDiagnostic, ValidationOptions, ValidationResult } from "./validate.js";
 export { validateBatch, validateDocument, validateFragment, validateObservation } from "./validate.js";
 export * from "./query.js";
+export type { ChartView, SummaryView, TableView, ViewDiagnostic, ViewSection, ViewSpec } from "./presentation.js";
+export { createDevelocityViewSpec, createObservationViewSpec } from "./presentation.js";

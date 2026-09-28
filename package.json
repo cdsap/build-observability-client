@@ -49,6 +49,18 @@
       "types": "./dist/query.d.ts",
       "default": "./dist/query.js"
     },
+    "./presentation": {
+      "types": "./dist/presentation.d.ts",
+      "default": "./dist/presentation.js"
+    },
+    "./render-dom": {
+      "types": "./dist/render/dom.d.ts",
+      "default": "./dist/render/dom.js"
+    },
+    "./adapters/extension": {
+      "types": "./dist/adapters/extension.d.ts",
+      "default": "./dist/adapters/extension.js"
+    },
     "./schema/*": "./schemas/schema/*",
     "./registry/*": "./schemas/registry/*",
     "./package.json": "./package.json"
