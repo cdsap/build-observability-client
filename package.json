@@ -64,9 +64,12 @@
     "check": "tsc --noEmit --project tsconfig.json",
     "test": "npm run build && node --test \"test/**/*.test.mjs\"",
     "pack:verify": "npm run build && node scripts/verify-package.mjs",
+    "browser:check": "npm run build && node scripts/verify-browser.mjs",
+    "benchmark": "npm run build && node scripts/benchmark.mjs",
+    "release:check": "npm run check && npm test && npm run pack:verify && node scripts/verify-release.mjs",
     "assets:sync": "node scripts/sync-schema-assets.mjs",
     "assets:check": "node scripts/sync-schema-assets.mjs --check",
-    "prepublishOnly": "npm run check && npm test && node scripts/verify-package.mjs"
+    "prepublishOnly": "npm run check && npm test && npm run browser:check && node scripts/verify-package.mjs && node scripts/verify-release.mjs"
   },
   "engines": {
     "node": ">=22"

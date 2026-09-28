@@ -54,7 +54,15 @@ npm run check         # type-check without DOM or Node.js globals
 npm run build         # compile to dist/
 npm test              # build, then run node:test suites
 npm run pack:verify   # pack and smoke-test the tarball in a clean consumer
+npm run browser:check # type-check documented ESM imports for browser-oriented builds
+npm run benchmark     # record validation, normalization, query, and rendering timings
+npm run release:check # run the local publication and provenance gates
 ```
+
+The conformance corpus is in `test/fixtures/conformance.json`; the fuzz-safety
+cases are in `test/fuzz.test.mjs`. Performance thresholds are documented in
+`docs/performance.md`, and optional exporters/renderers are tracked in
+`docs/follow-ups.md`.
 
 Schema and registry files in `schemas/` are copied verbatim from a pinned
 [schema release](https://github.com/cdsap/build-observability-schema/releases)
