@@ -8,7 +8,7 @@ const pkg = JSON.parse(readFileSync(new URL("package.json", root), "utf8"));
 const provenance = JSON.parse(readFileSync(new URL("schemas/provenance.json", root), "utf8"));
 
 // Keep in sync with the subpath table in README.md and docs/adr/0001.
-const DOCUMENTED_SUBPATHS = [".", "./assets", "./validate", "./registry", "./model", "./parse", "./diagnostics", "./adapters/source", "./adapters/direct", "./adapters/report", "./adapters/ndjson", "./adapters/develocity", "./query", "./schema/*", "./registry/*", "./package.json"];
+const DOCUMENTED_SUBPATHS = [".", "./assets", "./validate", "./registry", "./model", "./parse", "./diagnostics", "./adapters/source", "./adapters/direct", "./adapters/report", "./adapters/ndjson", "./adapters/develocity", "./query", "./view", "./schema/*", "./registry/*", "./package.json"];
 
 // Reserved by ADR 0001 until a spike adds the module and the matching export.
 const UNIMPLEMENTED_RESERVED_SUBPATHS = ["./presentation", "./render-dom", "./render-vega-lite"];
@@ -74,6 +74,10 @@ describe("package exports", () => {
 
   it("imports the query entry point", async () => {
     assert.equal(typeof (await import("@cdsap/gbos/query")).queryObservations, "function");
+  });
+
+  it("imports the view entry point", async () => {
+    assert.equal(typeof (await import("@cdsap/gbos/view")).buildViewModel, "function");
   });
 
   it("resolves every pinned schema and registry file through its subpath", () => {
