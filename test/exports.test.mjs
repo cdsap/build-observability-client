@@ -8,7 +8,7 @@ const pkg = JSON.parse(readFileSync(new URL("package.json", root), "utf8"));
 const provenance = JSON.parse(readFileSync(new URL("schemas/provenance.json", root), "utf8"));
 
 // Keep in sync with the subpath table in README.md and docs/adr/0001.
-const DOCUMENTED_SUBPATHS = [".", "./assets", "./validate", "./registry", "./model", "./parse", "./diagnostics", "./adapters/develocity", "./schema/*", "./registry/*", "./package.json"];
+const DOCUMENTED_SUBPATHS = [".", "./assets", "./validate", "./registry", "./model", "./parse", "./diagnostics", "./adapters/source", "./adapters/direct", "./adapters/report", "./adapters/ndjson", "./adapters/develocity", "./schema/*", "./registry/*", "./package.json"];
 
 describe("package exports", () => {
   it("exposes exactly the documented subpaths", () => {
@@ -35,11 +35,11 @@ describe("package exports", () => {
     assert.deepEqual(SCHEMA_ASSETS, provenance);
   });
 
-  it("imports validator and registry entry points", async () => {
-    const validator = await import("@cdsap/gbos/validate");
-    const registry = await import("@cdsap/gbos/registry");
-    assert.equal(typeof validator.validateObservation, "function");
-    assert.equal(typeof registry.createRegistryLookup, "function");
+  it("imports the model, parser, diagnostics, and Develocity adapter entry points", async () => {
+    assert.equal(typeof (await import("@cdsap/gbos/model")).observationFingerprint, "function");
+    assert.equal(typeof (await import("@cdsap/gbos/parse")).parseObservations, "function");
+    assert.equal(typeof (await import("@cdsap/gbos/diagnostics")).diagnostic, "function");
+    assert.equal(typeof (await import("@cdsap/gbos/adapters/develocity")).parseDevelocityProjection, "function");
   });
 
   it("imports the model, parser, and diagnostics entry points", async () => {
@@ -51,6 +51,11 @@ describe("package exports", () => {
   it("imports the Develocity adapter entry point", async () => {
     const { parseDevelocityProjection } = await import("@cdsap/gbos/adapters/develocity");
     assert.equal(typeof parseDevelocityProjection, "function");
+  });
+
+  it("imports validator and registry entry points", async () => {
+    assert.equal(typeof (await import("@cdsap/gbos/validate")).validateObservation, "function");
+    assert.equal(typeof (await import("@cdsap/gbos/registry")).createRegistryLookup, "function");
   });
 
   it("resolves every pinned schema and registry file through its subpath", () => {

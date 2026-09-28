@@ -7,14 +7,14 @@ export interface Measurement { readonly name: string; readonly value: number; re
 export interface HistogramBucket { readonly gte: number; readonly lt?: number; readonly count: number; }
 export interface Histogram { readonly name: string; readonly unit: string; readonly aggregation: "count"; readonly buckets: readonly HistogramBucket[]; }
 export type DiagnosticSeverity = "info" | "warning" | "error";
-export interface Diagnostic { readonly code: string; readonly severity: DiagnosticSeverity; readonly message?: string; readonly path?: string; readonly ordinal?: number; }
+export interface Diagnostic { readonly code: string; readonly severity: DiagnosticSeverity; readonly message?: string; readonly path?: string; readonly ordinal?: number; readonly line?: number; }
 export interface Observation {
   readonly schemaVersion: "1.0.0"; readonly producer: Producer; readonly scope: string; readonly aggregationScope: AggregationScope;
   readonly attributes: Attributes; readonly measurements?: readonly Measurement[]; readonly histograms?: readonly Histogram[];
   readonly partial?: boolean; readonly droppedObservations?: number; readonly diagnostics?: readonly Diagnostic[];
 }
 export type Transport = "observation" | "batch" | "fragment" | "report" | "ndjson" | string;
-export interface BuildContext { readonly buildId?: string; readonly projectId?: string; readonly invocationId?: string; readonly url?: string; readonly [key: string]: string | undefined; }
+export interface BuildContext { readonly buildId?: string; readonly projectId?: string; readonly invocationId?: string; readonly url?: string; readonly [key: string]: JsonValue | undefined; }
 export interface Provenance {
   readonly transport: Transport; readonly ordinal: number; readonly source?: string; readonly sourceId?: string; readonly build?: BuildContext;
 }
@@ -26,6 +26,15 @@ export interface ObservationDataset extends DatasetDiagnostics {
   readonly tags: ReadonlyMap<string, readonly NormalizedObservation[]>;
 }
 export interface DatasetOptions { readonly diagnostics?: readonly Diagnostic[]; readonly rejectedRecords?: readonly RejectedRecord[]; }
+
+export type JsonPrimitive = string | number | boolean | null;
+export type JsonValue = JsonPrimitive | JsonValue[] | { readonly [key: string]: JsonValue };
+export type Resource = Readonly<Record<string, AttributeValue>>;
+export type SourceKind = "report" | "ndjson" | "direct";
+export interface RecordMetadata { readonly resource?: Resource; readonly buildContext?: BuildContext; }
+export interface RecordProvenance { readonly source: SourceKind; readonly index: number; readonly line?: number; }
+export interface NormalizedRecord { readonly observation: Observation; readonly metadata: RecordMetadata; readonly provenance: RecordProvenance; }
+export interface NormalizedDataset { readonly records: readonly NormalizedRecord[]; readonly diagnostics: readonly Diagnostic[]; }
 
 function freeze<T>(value: T): T {
   if (value !== null && typeof value === "object" && !Object.isFrozen(value)) {
