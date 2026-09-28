@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "description": "Small cross-producer corpus for the producer names used by the GBOS rollout.",
+  "cases": [
+    {
+      "producer": "info-test-process",
+      "transport": "direct",
+      "input": {
+        "schemaVersion": "1.0.0",
+        "producer": { "name": "info-test-process", "version": "2.0.0" },
+        "scope": "jvm.process",
+        "aggregationScope": "build",
+        "attributes": { "build.tool.name": "gradle", "test.process.name": "unit" },
+        "measurements": [{ "name": "jvm.process.cpu.time", "value": 12.5, "unit": "s", "aggregation": "sum" }]
+      }
+    },
+    {
+      "producer": "info-kotlin-process",
+      "transport": "report",
+      "input": {
+        "schemaVersion": "1.0.0",
+        "resource": { "service.name": "info-kotlin-process" },
+        "observationBatches": [{
+          "schemaVersion": "1.0.0",
+          "producer": { "name": "info-kotlin-process", "version": "1.0.0" },
+          "observations": [{
+            "scope": "jvm.process",
+            "aggregationScope": "entity",
+            "attributes": { "kotlin.compiler": "default" },
+            "measurements": [{ "name": "jvm.process.memory.heap.used", "value": 42, "unit": "By", "aggregation": "last" }]
+          }]
+        }]
+      }
+    },
+    {
+      "producer": "gcreport",
+      "transport": "ndjson",
+      "input": "{\"schemaVersion\":\"1.0.0\",\"producer\":{\"name\":\"gcreport\",\"version\":\"1.0.0\"},\"scope\":\"jvm.gc\",\"aggregationScope\":\"entity\",\"attributes\":{\"jvm.gc.name\":\"G1 Young Generation\"},\"histograms\":[{\"name\":\"jvm.gc.event.time\",\"unit\":\"s\",\"aggregation\":\"count\",\"buckets\":[{\"gte\":0,\"lt\":1,\"count\":3}]}]}"
+    },
+    {
+      "producer": "schema-example",
+      "transport": "develocity",
+      "input": {
+        "customValues": [
+          { "name": "gbos.schema", "value": "1.0.0" },
+          { "name": "gbos.v1.producer.schema_example.name", "value": "schema-example" },
+          { "name": "gbos.v1.producer.schema_example.version", "value": "1.0.0" },
+          { "name": "gbos.v1.producer.schema_example.observation", "value": "{\"scope\":\"build\",\"aggregationScope\":\"build\",\"attributes\":{\"build.id\":\"example\"},\"measurements\":[{\"name\":\"build.duration\",\"value\":1.25,\"unit\":\"s\",\"aggregation\":\"last\"}]}" }
+        ]
+      }
+    }
+  ]
+}

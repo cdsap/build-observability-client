@@ -11,6 +11,7 @@ import { fileURLToPath } from "node:url";
 const root = fileURLToPath(new URL("../", import.meta.url));
 const require = createRequire(import.meta.url);
 const FORBIDDEN_PREFIXES = ["src/", "test/", "scripts/", "node_modules/", ".github/", "docs/"];
+const MAX_PACKED_BYTES = 250_000;
 
 function run(command, args, cwd) {
   return execFileSync(command, args, { cwd, encoding: "utf8", stdio: ["ignore", "pipe", "inherit"] });
@@ -102,6 +103,9 @@ async function main() {
   try {
     const [packed] = JSON.parse(npm(["pack", "--json", "--pack-destination", workDir], root));
     const files = new Set(packed.files.map((file) => file.path));
+    if (packed.size > MAX_PACKED_BYTES) {
+      throw new Error(`Packed tarball ${packed.filename} is ${packed.size} bytes; maximum is ${MAX_PACKED_BYTES} bytes.`);
+    }
     const problems = verifyTarballFiles(pkg, provenance, files);
     if (problems.length > 0) {
       throw new Error(`Packed tarball ${packed.filename} is invalid:\n  ${problems.join("\n  ")}`);
