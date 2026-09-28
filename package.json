@@ -45,6 +45,10 @@
       "types": "./dist/adapters/develocity.d.ts",
       "default": "./dist/adapters/develocity.js"
     },
+    "./query": {
+      "types": "./dist/query.d.ts",
+      "default": "./dist/query.js"
+    },
     "./schema/*": "./schemas/schema/*",
     "./registry/*": "./schemas/registry/*",
     "./package.json": "./package.json"

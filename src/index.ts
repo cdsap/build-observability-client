@@ -13,3 +13,4 @@ export type { RegistryEntry, RegistryKind, RegistryLookup, SemanticAttribute, Se
 export { createRegistryLookup } from "./registry.js";
 export type { DiagnosticSource, DocumentKind, ValidationDiagnostic, ValidationOptions, ValidationResult } from "./validate.js";
 export { validateBatch, validateDocument, validateFragment, validateObservation } from "./validate.js";
+export * from "./query.js";
