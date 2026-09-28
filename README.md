@@ -32,6 +32,8 @@ The package is ESM-only and targets Node.js 22+ and ES2022 browsers.
 | `@cdsap/gbos/adapters/ndjson` | `parseNdjson` and `parseNdjsonAsync` for complete or async NDJSON input. |
 | `@cdsap/gbos/adapters/develocity` | `parseDevelocityProjection`, the ordered custom-value reconstruction adapter. |
 | `@cdsap/gbos/query` | Renderer-neutral observation queries, safe aggregation, derivations, grouping, and unit formatting. |
+| `@cdsap/gbos/validate` | Browser-safe structural and semantic validation APIs. |
+| `@cdsap/gbos/registry` | Registry lookup construction for semantic validation. |
 | `@cdsap/gbos/schema/*` | Canonical JSON Schemas, e.g. `schema/observation.schema.json`. |
 | `@cdsap/gbos/registry/*` | Canonical registries, e.g. `registry/semantic-conventions.json`. |
 | `@cdsap/gbos/package.json` | Package metadata. |

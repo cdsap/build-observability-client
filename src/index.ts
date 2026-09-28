@@ -9,4 +9,8 @@ export { directObservationAdapter, parseDirectObservation, parseDirectObservatio
 export { parseReport, parseReportJson, reportAdapter } from "./adapters/report.js";
 export { ndjsonAdapter, parseNdjson, parseNdjsonAsync, parseNDJSON, parseNDJSONAsync } from "./adapters/ndjson.js";
 export { parseDevelocityProjection } from "./adapters/develocity.js";
+export type { RegistryEntry, RegistryKind, RegistryLookup, SemanticAttribute, SemanticMetric, SemanticRegistry, SemanticScope } from "./registry.js";
+export { createRegistryLookup } from "./registry.js";
+export type { DiagnosticSource, DocumentKind, ValidationDiagnostic, ValidationOptions, ValidationResult } from "./validate.js";
+export { validateBatch, validateDocument, validateFragment, validateObservation } from "./validate.js";
 export * from "./query.js";

@@ -32,6 +32,8 @@ Current subpaths:
 | `@cdsap/gbos/adapters/report` | Report envelope and observation-batch adapter. |
 | `@cdsap/gbos/adapters/ndjson` | Complete-text and async-iterable NDJSON adapters. |
 | `@cdsap/gbos/adapters/develocity` | `parseDevelocityProjection`: ordered Develocity custom-value reconstruction. |
+| `@cdsap/gbos/validate` | Browser-safe structural and semantic validation APIs. |
+| `@cdsap/gbos/registry` | Registry lookup construction for semantic validation. |
 | `@cdsap/gbos/schema/*` | Canonical JSON Schemas, e.g. `@cdsap/gbos/schema/observation.schema.json`. |
 | `@cdsap/gbos/registry/*` | Canonical registries, e.g. `@cdsap/gbos/registry/semantic-conventions.json`. |
 | `@cdsap/gbos/package.json` | Package metadata. |

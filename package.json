@@ -17,9 +17,13 @@
       "types": "./dist/assets/index.d.ts",
       "default": "./dist/assets/index.js"
     },
-    "./query": {
-      "types": "./dist/query.d.ts",
-      "default": "./dist/query.js"
+    "./validate": {
+      "types": "./dist/validate.d.ts",
+      "default": "./dist/validate.js"
+    },
+    "./registry": {
+      "types": "./dist/registry.d.ts",
+      "default": "./dist/registry.js"
     },
     "./model": {
       "types": "./dist/model/index.d.ts",
@@ -40,6 +44,10 @@
     "./adapters/develocity": {
       "types": "./dist/adapters/develocity.d.ts",
       "default": "./dist/adapters/develocity.js"
+    },
+    "./query": {
+      "types": "./dist/query.d.ts",
+      "default": "./dist/query.js"
     },
     "./schema/*": "./schemas/schema/*",
     "./registry/*": "./schemas/registry/*",
