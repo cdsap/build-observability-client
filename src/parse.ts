@@ -8,6 +8,22 @@ export interface ParseOptions {
 }
 export type ParseResult = ReturnType<typeof createDataset>;
 
+export class ParseError extends Error {
+  readonly diagnostics: readonly Diagnostic[];
+  constructor(message: string, diagnostics: readonly Diagnostic[]) { super(message); this.name = "ParseError"; this.diagnostics = diagnostics; }
+}
+export const modeOf = (options: ParseOptions): ParseMode => options.mode ?? "strict";
+export function objectOf(value: unknown): Record<string, unknown> | undefined { return value !== null && typeof value === "object" && !Array.isArray(value) ? value as Record<string, unknown> : undefined; }
+export function isAttributeRecord(value: unknown): value is Record<string, AttributeValue> { const object = objectOf(value); return object !== undefined && Object.values(object).every((item) => typeof item === "string" || typeof item === "number" || typeof item === "boolean"); }
+export function producerOf(value: unknown): import("./model.js").Producer | undefined { const object = objectOf(value); return typeof object?.name === "string" && typeof object.version === "string" ? { name: object.name, version: object.version } : undefined; }
+export function observationOf(value: unknown, headers: { schemaVersion?: unknown; producer?: unknown } = {}): Observation | undefined {
+  const object = objectOf(value); if (object === undefined) return undefined;
+  const schemaVersion = object.schemaVersion ?? headers.schemaVersion; const producer = producerOf(object.producer ?? headers.producer);
+  if (schemaVersion !== "1.0.0" || producer === undefined || typeof object.scope !== "string" || !["entity", "task", "project", "build"].includes(object.aggregationScope as string) || !isAttributeRecord(object.attributes) || (!Array.isArray(object.measurements) && !Array.isArray(object.histograms))) return undefined;
+  const observation = { ...object, schemaVersion, producer }; delete (observation as Record<string, unknown>).$schema; return observation as unknown as Observation;
+}
+export function failure(code: string, message: string, mode: ParseMode, diagnostics: Diagnostic[]): void { const entry = { code, severity: "error" as const, message }; diagnostics.push(entry); if (mode === "strict") throw new ParseError(message, [entry]); }
+
 function issue(code: string, severity: DiagnosticSeverity, message: string, path: string, ordinal: number): Diagnostic { return diagnostic(code, severity, message, path, ordinal); }
 function isRecord(value: unknown): value is Record<string, unknown> { return value !== null && typeof value === "object" && !Array.isArray(value); }
 
