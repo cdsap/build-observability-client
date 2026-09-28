@@ -32,6 +32,8 @@ Current subpaths:
 | `@cdsap/gbos/adapters/report` | Report envelope and observation-batch adapter. |
 | `@cdsap/gbos/adapters/ndjson` | Complete-text and async-iterable NDJSON adapters. |
 | `@cdsap/gbos/adapters/develocity` | `parseDevelocityProjection`: ordered Develocity custom-value reconstruction. |
+| `@cdsap/gbos/query` | Renderer-neutral queries, derivations, grouping, safe aggregation, and unit formatting. |
+| `@cdsap/gbos/view` | Semantic presentation profiles and renderer-neutral `ViewModel`/`ViewSpec` planning. |
 | `@cdsap/gbos/validate` | Browser-safe structural and semantic validation APIs. |
 | `@cdsap/gbos/registry` | Registry lookup construction for semantic validation. |
 | `@cdsap/gbos/schema/*` | Canonical JSON Schemas, e.g. `@cdsap/gbos/schema/observation.schema.json`. |
@@ -40,7 +42,6 @@ Current subpaths:
 
 The following subpaths are reserved. Each is added to `exports` by the spike that
 implements it, never before, so every documented subpath is importable:
-`./adapters/develocity`, `./query`,
 `./presentation`, `./render-dom`, and `./render-vega-lite`.
 
 A single package is enough for now. Subpath exports plus `"sideEffects": false`

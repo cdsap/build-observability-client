@@ -32,6 +32,7 @@ The package is ESM-only and targets Node.js 22+ and ES2022 browsers.
 | `@cdsap/gbos/adapters/ndjson` | `parseNdjson` and `parseNdjsonAsync` for complete or async NDJSON input. |
 | `@cdsap/gbos/adapters/develocity` | `parseDevelocityProjection`, the ordered custom-value reconstruction adapter. |
 | `@cdsap/gbos/query` | Renderer-neutral observation queries, safe aggregation, derivations, grouping, and unit formatting. |
+| `@cdsap/gbos/view` | Semantic presentation profiles and renderer-neutral `ViewModel`/`ViewSpec` planning. |
 | `@cdsap/gbos/validate` | Browser-safe structural and semantic validation APIs. |
 | `@cdsap/gbos/registry` | Registry lookup construction for semantic validation. |
 | `@cdsap/gbos/schema/*` | Canonical JSON Schemas, e.g. `schema/observation.schema.json`. |
@@ -64,6 +65,23 @@ release artifact; `npm run assets:sync` regenerates them after the pin in
 The canonical design is documented in the GBOS consumer and visualization
 library specification. The schema repository owns the contract and registry;
 this repository owns consumer behavior and presentation planning.
+
+### Presentation profiles
+
+`buildViewModel(dataset)` matches each normalized observation against a
+priority-ordered profile registry. Matching uses only scope, aggregation scope,
+attributes, measurements, and histograms; producer names are never routing
+keys. The built-in profiles cover JVM processes, test workers, Kotlin and
+Gradle daemons, GC actions and histograms, artifacts, and a generic fallback.
+`registerProfile()` adds a deterministic custom profile.
+
+The resulting `ViewSpec` contains semantic panels and data references, not DOM,
+SVG, Vega-Lite, or browser instructions. A single measurement gets a metric
+panel; multiple measurements get a table because GBOS does not supply a time
+axis; histograms remain histograms. The planner never invents time series or
+silently aggregates incompatible data. Empty, partial, diagnostic, and unknown
+observations are represented explicitly in `state`, and view IDs are derived
+from stable semantic identity rather than transport provenance or values.
 
 ### Source adapters
 
