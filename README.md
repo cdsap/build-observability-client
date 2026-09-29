@@ -33,6 +33,9 @@ The package is ESM-only and targets Node.js 22+ and ES2022 browsers.
 | `@cdsap/gbos/adapters/develocity` | `parseDevelocityProjection`, the ordered custom-value reconstruction adapter. |
 | `@cdsap/gbos/query` | Renderer-neutral observation queries, safe aggregation, derivations, grouping, and unit formatting. |
 | `@cdsap/gbos/view` | Semantic presentation profiles and renderer-neutral `ViewModel`/`ViewSpec` planning. |
+| `@cdsap/gbos/presentation` | Renderer-neutral summary, table, chart, and diagnostic view specs. |
+| `@cdsap/gbos/render-dom` | Framework-neutral DOM/SVG renderer for view specs. |
+| `@cdsap/gbos/adapters/extension` | Host-injected Manifest V3 content-script/service-worker boundary. |
 | `@cdsap/gbos/validate` | Browser-safe structural and semantic validation APIs. |
 | `@cdsap/gbos/registry` | Registry lookup construction for semantic validation. |
 | `@cdsap/gbos/schema/*` | Canonical JSON Schemas, e.g. `schema/observation.schema.json`. |

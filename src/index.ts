@@ -16,3 +16,5 @@ export { validateBatch, validateDocument, validateFragment, validateObservation 
 export * from "./query.js";
 export type { ProfileMatch, ProfileRegistry, ViewChart, ViewDataReference, ViewModel, ViewPanel, ViewProfile, ViewProfileContext, ViewSpec, ViewState } from "./view.js";
 export { buildViewModel, createProfileRegistry, defaultViewProfiles, matchProfile, planViews, registerProfile, stableViewId } from "./view.js";
+export type { ChartView, SummaryView, TableView, ViewDiagnostic, ViewSection } from "./presentation.js";
+export { createDevelocityViewSpec, createObservationViewSpec } from "./presentation.js";
