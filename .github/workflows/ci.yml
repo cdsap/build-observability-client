@@ -37,3 +37,28 @@ jobs:
         with:
           node-version: "24"
       - run: npm run assets:check
+
+  browser:
+    name: Browser-oriented ESM package smoke test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          cache: npm
+      - run: npm ci
+      - run: npm run browser:check
+
+  release-gates:
+    name: Package release metadata and tree-shaking gates
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          cache: npm
+      - run: npm ci
+      - run: node scripts/verify-release.mjs
+      - run: npm run pack:verify

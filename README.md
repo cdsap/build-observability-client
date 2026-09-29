@@ -32,9 +32,10 @@ The package is ESM-only and targets Node.js 22+ and ES2022 browsers.
 | `@cdsap/gbos/adapters/ndjson` | `parseNdjson` and `parseNdjsonAsync` for complete or async NDJSON input. |
 | `@cdsap/gbos/adapters/develocity` | `parseDevelocityProjection`, the ordered custom-value reconstruction adapter. |
 | `@cdsap/gbos/query` | Renderer-neutral observation queries, safe aggregation, derivations, grouping, and unit formatting. |
-| `@cdsap/gbos/presentation` | Renderer-neutral `ViewSpec` planning for summaries, tables, charts, and diagnostics. |
-| `@cdsap/gbos/render-dom` | Framework-neutral DOM/SVG renderer for `ViewSpec` values. |
-| `@cdsap/gbos/adapters/extension` | Host-injected Manifest V3 content-script/service-worker messaging boundary. |
+| `@cdsap/gbos/view` | Semantic presentation profiles and renderer-neutral `ViewModel`/`ViewSpec` planning. |
+| `@cdsap/gbos/presentation` | Renderer-neutral summary, table, chart, and diagnostic view specs. |
+| `@cdsap/gbos/render-dom` | Framework-neutral DOM/SVG renderer for view specs. |
+| `@cdsap/gbos/adapters/extension` | Host-injected Manifest V3 content-script/service-worker boundary. |
 | `@cdsap/gbos/validate` | Browser-safe structural and semantic validation APIs. |
 | `@cdsap/gbos/registry` | Registry lookup construction for semantic validation. |
 | `@cdsap/gbos/schema/*` | Canonical JSON Schemas, e.g. `schema/observation.schema.json`. |
@@ -56,7 +57,15 @@ npm run check         # type-check without DOM or Node.js globals
 npm run build         # compile to dist/
 npm test              # build, then run node:test suites
 npm run pack:verify   # pack and smoke-test the tarball in a clean consumer
+npm run browser:check # type-check documented ESM imports for browser-oriented builds
+npm run benchmark     # record validation, normalization, query, and rendering timings
+npm run release:check # run the local publication and provenance gates
 ```
+
+The conformance corpus is in `test/fixtures/conformance.json`; the fuzz-safety
+cases are in `test/fuzz.test.mjs`. Performance thresholds are documented in
+`docs/performance.md`, and optional exporters/renderers are tracked in
+`docs/follow-ups.md`.
 
 Schema and registry files in `schemas/` are copied verbatim from a pinned
 [schema release](https://github.com/cdsap/build-observability-schema/releases)
@@ -67,6 +76,23 @@ release artifact; `npm run assets:sync` regenerates them after the pin in
 The canonical design is documented in the GBOS consumer and visualization
 library specification. The schema repository owns the contract and registry;
 this repository owns consumer behavior and presentation planning.
+
+### Presentation profiles
+
+`buildViewModel(dataset)` matches each normalized observation against a
+priority-ordered profile registry. Matching uses only scope, aggregation scope,
+attributes, measurements, and histograms; producer names are never routing
+keys. The built-in profiles cover JVM processes, test workers, Kotlin and
+Gradle daemons, GC actions and histograms, artifacts, and a generic fallback.
+`registerProfile()` adds a deterministic custom profile.
+
+The resulting `ViewSpec` contains semantic panels and data references, not DOM,
+SVG, Vega-Lite, or browser instructions. A single measurement gets a metric
+panel; multiple measurements get a table because GBOS does not supply a time
+axis; histograms remain histograms. The planner never invents time series or
+silently aggregates incompatible data. Empty, partial, diagnostic, and unknown
+observations are represented explicitly in `state`, and view IDs are derived
+from stable semantic identity rather than transport provenance or values.
 
 ### Source adapters
 

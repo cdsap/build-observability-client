@@ -8,16 +8,30 @@ const pkg = JSON.parse(readFileSync(new URL("package.json", root), "utf8"));
 const provenance = JSON.parse(readFileSync(new URL("schemas/provenance.json", root), "utf8"));
 
 // Keep in sync with the subpath table in README.md and docs/adr/0001.
-const DOCUMENTED_SUBPATHS = [".", "./assets", "./validate", "./registry", "./model", "./parse", "./diagnostics", "./adapters/source", "./adapters/direct", "./adapters/report", "./adapters/ndjson", "./adapters/develocity", "./query", "./presentation", "./render-dom", "./adapters/extension", "./schema/*", "./registry/*", "./package.json"];
+const DOCUMENTED_SUBPATHS = [".", "./assets", "./validate", "./registry", "./model", "./parse", "./diagnostics", "./adapters/source", "./adapters/direct", "./adapters/report", "./adapters/ndjson", "./adapters/develocity", "./query", "./view", "./presentation", "./render-dom", "./adapters/extension", "./schema/*", "./registry/*", "./package.json"];
+
+// Reserved by ADR 0001 until a spike adds the module and the matching export.
+const UNIMPLEMENTED_RESERVED_SUBPATHS = ["./render-vega-lite"];
 
 describe("package exports", () => {
   it("exposes exactly the documented subpaths", () => {
     assert.deepEqual(Object.keys(pkg.exports), DOCUMENTED_SUBPATHS);
   });
 
-  it("points every code subpath at built JavaScript and declarations", () => {
+  it("does not advertise unfinished reserved subpaths", async () => {
+    for (const subpath of UNIMPLEMENTED_RESERVED_SUBPATHS) {
+      assert.equal(pkg.exports[subpath], undefined, subpath);
+      await assert.rejects(import(`@cdsap/gbos/${subpath.slice(2)}`), { code: "ERR_PACKAGE_PATH_NOT_EXPORTED" }, subpath);
+    }
+  });
+
+  it("points every declared export target at a file the build produces", () => {
     for (const [subpath, target] of Object.entries(pkg.exports)) {
-      if (typeof target === "string") continue;
+      if (typeof target === "string") {
+        if (target.includes("*")) continue;
+        assert.ok(existsSync(new URL(target, root)), `${subpath} -> ${target}`);
+        continue;
+      }
       assert.deepEqual(Object.keys(target), ["types", "default"], `${subpath} condition order`);
       assert.ok(existsSync(new URL(target.types, root)), `${subpath} types: ${target.types}`);
       assert.ok(existsSync(new URL(target.default, root)), `${subpath} default: ${target.default}`);
@@ -60,6 +74,10 @@ describe("package exports", () => {
 
   it("imports the query entry point", async () => {
     assert.equal(typeof (await import("@cdsap/gbos/query")).queryObservations, "function");
+  });
+
+  it("imports the view entry point", async () => {
+    assert.equal(typeof (await import("@cdsap/gbos/view")).buildViewModel, "function");
   });
 
   it("imports the presentation, DOM renderer, and extension boundaries", async () => {

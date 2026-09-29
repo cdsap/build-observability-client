@@ -32,18 +32,20 @@ Current subpaths:
 | `@cdsap/gbos/adapters/report` | Report envelope and observation-batch adapter. |
 | `@cdsap/gbos/adapters/ndjson` | Complete-text and async-iterable NDJSON adapters. |
 | `@cdsap/gbos/adapters/develocity` | `parseDevelocityProjection`: ordered Develocity custom-value reconstruction. |
-| `@cdsap/gbos/validate` | Browser-safe structural and semantic validation APIs. |
-| `@cdsap/gbos/registry` | Registry lookup construction for semantic validation. |
-| `@cdsap/gbos/presentation` | Renderer-neutral `ViewSpec` planning for summaries, tables, charts, and diagnostics. |
+| `@cdsap/gbos/query` | Renderer-neutral queries, derivations, grouping, safe aggregation, and unit formatting. |
+| `@cdsap/gbos/view` | Semantic presentation profiles and renderer-neutral `ViewModel`/`ViewSpec` planning. |
+| `@cdsap/gbos/presentation` | Renderer-neutral summary, table, chart, and diagnostic view specs. |
 | `@cdsap/gbos/render-dom` | Framework-neutral DOM/SVG rendering of `ViewSpec` values. |
 | `@cdsap/gbos/adapters/extension` | Host-injected content-script/service-worker messaging boundary. |
+| `@cdsap/gbos/validate` | Browser-safe structural and semantic validation APIs. |
+| `@cdsap/gbos/registry` | Registry lookup construction for semantic validation. |
 | `@cdsap/gbos/schema/*` | Canonical JSON Schemas, e.g. `@cdsap/gbos/schema/observation.schema.json`. |
 | `@cdsap/gbos/registry/*` | Canonical registries, e.g. `@cdsap/gbos/registry/semantic-conventions.json`. |
 | `@cdsap/gbos/package.json` | Package metadata. |
 
-The following subpath remains reserved for a later spike:
-`./render-vega-lite`. Each implemented subpath is added to `exports` by the
-spike that implements it, never before, so every documented subpath is importable.
+The following subpaths are reserved. Each is added to `exports` by the spike that
+implements it, never before, so every documented subpath is importable:
+`./render-vega-lite`.
 
 A single package is enough for now. Subpath exports plus `"sideEffects": false`
 let bundlers drop unused capabilities, and one version keeps the core and
