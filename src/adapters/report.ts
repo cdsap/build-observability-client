@@ -1,5 +1,6 @@
 import type { BuildContext, NormalizedDataset, Observation, Resource } from "../model.js";
-import { failure, modeOf, objectOf, observationOf, producerOf, type ParseOptions } from "../parse.js";
+import { failure, modeOf, type ParseOptions } from "../parse.js";
+import { observationOf, objectOf, producerOf } from "./observation.js";
 import type { SourceAdapter } from "./source.js";
 export interface ReportInput { readonly schemaVersion: "1.0.0"; readonly resource: Resource; readonly buildContext?: BuildContext; readonly observations?: readonly Observation[]; readonly observationBatches?: readonly { readonly schemaVersion: "1.0.0"; readonly producer: { readonly name: string; readonly version: string }; readonly observations: readonly Omit<Observation, "schemaVersion" | "producer">[] }[]; }
 export function parseReport(input: unknown, options: ParseOptions = {}): NormalizedDataset {

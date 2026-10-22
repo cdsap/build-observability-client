@@ -39,6 +39,13 @@ describe("source adapters", () => {
     assert.deepEqual(result.records[0].observation.attributes, { id: "one" });
   });
 
+  it("inherits NDJSON batch headers without adding transport metadata to attributes", () => {
+    const result = parseNdjson(JSON.stringify({ schemaVersion: "1.0.0", producer, observations: [batchChild] }));
+    assert.deepEqual(result.records[0].observation.producer, producer);
+    assert.equal(result.records[0].observation.schemaVersion, "1.0.0");
+    assert.deepEqual(result.records[0].observation.attributes, { id: "one" });
+  });
+
   it("isolates malformed neighboring NDJSON lines in compatible mode", () => {
     const result = parseNdjson(`${JSON.stringify(observation)}\nnot-json\n${JSON.stringify({ ...observation, attributes: { id: "two" } })}`, { mode: "compatible" });
     assert.deepEqual(result.records.map(({ observation: item }) => item.attributes.id), ["one", "two"]);

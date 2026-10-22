@@ -1,6 +1,7 @@
 import type { Diagnostic, NormalizedDataset } from "../model.js";
-import { failure, modeOf, observationOf, objectOf, type ParseOptions } from "../parse.js";
+import { failure, modeOf, type ParseOptions } from "../parse.js";
 import type { SourceAdapter } from "./source.js";
+import { observationOf, objectOf } from "./observation.js";
 export interface NdjsonOptions extends ParseOptions { readonly resource?: Readonly<Record<string, string | number | boolean>>; readonly buildContext?: Readonly<Record<string, import("../model.js").JsonValue>>; }
 function parseLines(lines: Iterable<string>, options: NdjsonOptions): NormalizedDataset {
   const mode = modeOf(options); const diagnostics: Diagnostic[] = []; const records = [] as import("../model.js").NormalizedRecord[]; let line = 0;
