@@ -1,6 +1,7 @@
 import type { NormalizedDataset } from "../model.js";
 import type { SourceAdapter } from "./source.js";
-import { failure, modeOf, observationOf, type ParseOptions } from "../parse.js";
+import { failure, modeOf, type ParseOptions } from "../parse.js";
+import { observationOf } from "./observation.js";
 export function parseDirectObservation(input: unknown, options: ParseOptions = {}): NormalizedDataset {
   const mode = modeOf(options);
   const diagnostics = [] as import("../model.js").Diagnostic[];
