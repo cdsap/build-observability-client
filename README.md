@@ -6,9 +6,9 @@ It parses GBOS transports, validates and normalizes observations, exposes query
 and derivation APIs, and plans renderer-neutral visualization models.
 
 The core is independent of Chrome extension APIs, Develocity markup, network
-access, authentication, DOM frameworks, and charting libraries. The initial
-consumer is a Develocity Chrome extension, but report JSON, NDJSON, Node.js,
-CLI, and other web consumers are first-class targets.
+access, authentication, DOM frameworks, and charting libraries. Report JSON,
+NDJSON, the `gbos` CLI, GBOS Viewer, and other web consumers are first-class
+targets. A live Build Scan page is an optional extra source, not the product.
 
 ## Status
 
@@ -48,6 +48,21 @@ import observationSchema from "@cdsap/gbos/schema/observation.schema.json" with 
 
 console.log(`${SCHEMA_ASSETS.repository}@${SCHEMA_ASSETS.tag}`);
 ```
+
+## Hosts
+
+This repository also ships two hosts that consume the library. They are GBOS tools, not a Develocity product.
+
+| Host | Use |
+|---|---|
+| `gbos` CLI (`apps/cli`) | `gbos view path/to/gbos.json` or `gbos view -` for stdin. Auto-detects report JSON, NDJSON, observations, batches, and custom-value projections. |
+| GBOS Viewer (`apps/extension`) | Chrome Manifest V3 extension. Open local JSON/NDJSON files. Optionally read GBOS custom values from a Build Scan page the user already has open. |
+
+```bash
+node apps/cli/src/main.mjs view test/fixtures/conformance.json
+```
+
+Load unpacked `apps/extension/dist` after `npm run build --workspace @cdsap/gbos-extension`.
 
 ## Development
 
