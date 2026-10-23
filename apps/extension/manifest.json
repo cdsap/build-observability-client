@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "GBOS Viewer",
+  "version": "0.1.0",
+  "description": "Inspect GBOS JSON, NDJSON, and optional Build Scan custom values.",
+  "action": {
+    "default_title": "GBOS Viewer",
+    "default_popup": "panel.html"
+  },
+  "side_panel": {
+    "default_path": "panel.html"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "permissions": ["sidePanel", "activeTab", "scripting"],
+  "optional_host_permissions": ["https://*/*", "http://*/*"]
+}
