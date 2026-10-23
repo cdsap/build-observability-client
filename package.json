@@ -70,11 +70,12 @@
     "./package.json": "./package.json"
   },
   "files": ["dist", "schemas"],
+  "workspaces": ["apps/cli", "apps/extension"],
   "scripts": {
     "clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
     "build": "npm run clean && tsc --project tsconfig.json",
     "check": "tsc --noEmit --project tsconfig.json",
-    "test": "npm run build && node --test \"test/**/*.test.mjs\"",
+    "test": "npm run build && node --test \"test/**/*.test.mjs\" \"apps/**/*.test.mjs\"",
     "pack:verify": "npm run build && node scripts/verify-package.mjs",
     "browser:check": "npm run build && node scripts/verify-browser.mjs",
     "benchmark": "npm run build && node scripts/benchmark.mjs",
@@ -91,6 +92,7 @@
     "provenance": true
   },
   "devDependencies": {
+    "esbuild": "^0.25.0",
     "typescript": "^5.8.0"
   }
 }

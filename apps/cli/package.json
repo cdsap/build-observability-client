@@ -1,0 +1,11 @@
+{
+  "name": "@cdsap/gbos-cli",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "gbos": "./src/main.mjs"
+  },
+  "dependencies": {
+    "@cdsap/gbos": "file:../.."
+  }
+}

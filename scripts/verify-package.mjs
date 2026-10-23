@@ -10,7 +10,7 @@ import { fileURLToPath } from "node:url";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const require = createRequire(import.meta.url);
-const FORBIDDEN_PREFIXES = ["src/", "test/", "scripts/", "node_modules/", ".github/", "docs/"];
+const FORBIDDEN_PREFIXES = ["src/", "test/", "scripts/", "node_modules/", ".github/", "docs/", "apps/"];
 const MAX_PACKED_BYTES = 250_000;
 
 function run(command, args, cwd) {

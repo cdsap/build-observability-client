@@ -1,0 +1,11 @@
+{
+  "name": "@cdsap/gbos-extension",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node ./build.mjs"
+  },
+  "dependencies": {
+    "@cdsap/gbos": "file:../.."
+  }
+}
