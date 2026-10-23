@@ -6,6 +6,7 @@ export type { ParseMode, ParseOptions, ParseResult } from "./parse.js";
 export { ParseError, parseObservation, parseObservations } from "./parse.js";
 export type { SourceAdapter } from "./adapters/source.js";
 export { directObservationAdapter, parseDirectObservation, parseDirectObservations } from "./adapters/direct.js";
+export { parseBatch } from "./adapters/batch.js";
 export { parseReport, parseReportJson, reportAdapter } from "./adapters/report.js";
 export { ndjsonAdapter, parseNdjson, parseNdjsonAsync, parseNDJSON, parseNDJSONAsync } from "./adapters/ndjson.js";
 export { parseDevelocityProjection } from "./adapters/develocity.js";

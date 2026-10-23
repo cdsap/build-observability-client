@@ -1,8 +1,9 @@
 import { parseDirectObservation } from "@cdsap/gbos/adapters/direct";
+import { parseBatch } from "@cdsap/gbos/adapters/batch";
 import { parseDevelocityProjection } from "@cdsap/gbos/adapters/develocity";
 import { parseNdjson } from "@cdsap/gbos/adapters/ndjson";
 import { parseReport } from "@cdsap/gbos/adapters/report";
-import { parseObservations, ParseError } from "@cdsap/gbos/parse";
+import { ParseError } from "@cdsap/gbos/parse";
 import { createDevelocityViewSpec, createObservationViewSpec } from "@cdsap/gbos/presentation";
 import { detectTransport, isKnownFormat } from "./detect-transport.mjs";
 
@@ -38,21 +39,7 @@ export function loadView(text, options = {}) {
     const value = JSON.parse(text);
     if (format === "report") return viewFromDataset(format, parseReport(value, COMPATIBLE));
     if (format === "observation") return viewFromDataset(format, parseDirectObservation(value, COMPATIBLE));
-    if (format === "batch") {
-      const observations = Array.isArray(value?.observations) ? value.observations : [];
-      const headers = { schemaVersion: value?.schemaVersion, producer: value?.producer };
-      return viewFromDataset(
-        format,
-        parseObservations(
-          observations.map((item) => ({
-            ...item,
-            schemaVersion: item.schemaVersion ?? headers.schemaVersion,
-            producer: item.producer ?? headers.producer,
-          })),
-          COMPATIBLE,
-        ),
-      );
-    }
+    if (format === "batch") return viewFromDataset(format, parseBatch(value, COMPATIBLE));
     const projection = parseDevelocityProjection(value, COMPATIBLE);
     return {
       format,
@@ -87,4 +74,3 @@ function viewFromDataset(format, dataset) {
     ok: observations.length > 0,
   };
 }
-
