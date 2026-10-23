@@ -39,6 +39,7 @@
     },
     "./adapters/source": { "types": "./dist/adapters/source.d.ts", "default": "./dist/adapters/source.js" },
     "./adapters/direct": { "types": "./dist/adapters/direct.d.ts", "default": "./dist/adapters/direct.js" },
+    "./adapters/batch": { "types": "./dist/adapters/batch.d.ts", "default": "./dist/adapters/batch.js" },
     "./adapters/report": { "types": "./dist/adapters/report.d.ts", "default": "./dist/adapters/report.js" },
     "./adapters/ndjson": { "types": "./dist/adapters/ndjson.d.ts", "default": "./dist/adapters/ndjson.js" },
     "./adapters/develocity": {

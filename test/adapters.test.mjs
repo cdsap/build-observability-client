@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { describe, it } from "node:test";
 import { parseDirectObservation } from "@cdsap/gbos/adapters/direct";
+import { parseBatch } from "@cdsap/gbos/adapters/batch";
 import { parseNdjson, parseNdjsonAsync } from "@cdsap/gbos/adapters/ndjson";
 import { parseReport } from "@cdsap/gbos/adapters/report";
 import { ParseError } from "@cdsap/gbos/parse";
@@ -37,6 +38,20 @@ describe("source adapters", () => {
     assert.equal(result.records[0].observation.schemaVersion, "1.0.0");
     assert.deepEqual(result.records[0].metadata.resource, { "build.id": "b1" });
     assert.deepEqual(result.records[0].observation.attributes, { id: "one" });
+  });
+
+  it("inherits batch headers while preserving child metadata precedence", () => {
+    const child = { ...batchChild, schemaVersion: "1.0.0", producer: { name: "child", version: "2.0.0" } };
+    const result = parseBatch({ schemaVersion: "1.0.0", producer, observations: [batchChild, child] });
+    assert.deepEqual(result.observations.map((item) => item.producer), [producer, child.producer]);
+    assert.deepEqual(result.observations.map((item) => item.attributes), [{ id: "one" }, { id: "one" }]);
+  });
+
+  it("retains compatible-mode diagnostics for malformed batch children", () => {
+    const result = parseBatch({ schemaVersion: "1.0.0", producer, observations: [batchChild, { attributes: {} }] });
+    assert.equal(result.observations.length, 1);
+    assert.ok(result.diagnostics.length > 0);
+    assert.equal(result.rejectedRecords.length, 1);
   });
 
   it("inherits NDJSON batch headers without adding transport metadata to attributes", () => {
